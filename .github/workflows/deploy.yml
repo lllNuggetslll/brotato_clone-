@@ -15,7 +15,7 @@ jobs:
       # 1. This step downloads Godot and builds your game
       - name: Export Godot Project
         id: export
-        uses: firebelley/godot-export@v5.2.1
+        uses: firebelley/godot-export@v7.0.0
         with:
           # Swapped to GitHub release URLs to prevent rate-limiting!
           godot_executable_download_url: https://github.com/godotengine/godot/releases/download/4.6.3-stable/Godot_v4.6.3-stable_linux.x86_64.zip
