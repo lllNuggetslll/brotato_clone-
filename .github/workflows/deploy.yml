@@ -3,7 +3,7 @@ name: Export and Deploy to Itch.io
 # This tells GitHub to run the script whenever you push to the 'main' branch
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   export_and_deploy:
@@ -18,9 +18,9 @@ jobs:
         uses: firebelley/godot-export@v5.2.1
         with:
           # Swapped to GitHub release URLs to prevent rate-limiting!
-          godot_executable_download_url: https://github.com/godotengine/godot/releases/download/4.2.2-stable/Godot_v4.2.2-stable_linux.x86_64.zip
-          godot_export_templates_download_url: https://github.com/godotengine/godot/releases/download/4.2.2-stable/Godot_v4.2.2-stable_export_templates.tpz
-          relative_project_path: ./ 
+          godot_executable_download_url: https://github.com/godotengine/godot/releases/download/4.6.3-stable/Godot_v4.6.3-stable_linux.x86_64.zip
+          godot_export_templates_download_url: https://github.com/godotengine/godot/releases/download/4.6.3-stable/Godot_v4.6.3-stable_export_templates.tpz
+          relative_project_path: ./
           archive_output: true
 
       # 2. This step takes the built game and pushes it to Itch.io
@@ -30,7 +30,7 @@ jobs:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
           CHANNEL: windows
           ITCH_USER: llnuggetsll # <--- CHANGE THIS
-          ITCH_GAME: test-game     # <--- CHANGE THIS
-          # This tells it to grab the Windows zip file from the previous step. 
+          ITCH_GAME: test-game # <--- CHANGE THIS
+          # This tells it to grab the Windows zip file from the previous step.
           # Ensure your preset in export_presets.cfg is named exactly "Windows Desktop"
           PACKAGE: ${{ steps.export.outputs.archive_directory }}/Windows Desktop.zip
