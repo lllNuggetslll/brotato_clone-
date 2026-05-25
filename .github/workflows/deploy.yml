@@ -23,14 +23,15 @@ jobs:
           relative_project_path: ./
           archive_output: true
 
+      - name: Copy archive to workspace
+        run: cp "${{ steps.export.outputs.archive_directory }}/Windows Desktop.zip" "${{ github.workspace }}/Windows Desktop.zip"
+
       # 2. This step takes the built game and pushes it to Itch.io
       - name: Publish Windows Build to Itch.io
         uses: manleydev/butler-publish-itchio-action@v1.2.0
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
           CHANNEL: windows
-          ITCH_USER: llnuggetsll # <--- CHANGE THIS
-          ITCH_GAME: test-game # <--- CHANGE THIS
-          # This tells it to grab the Windows zip file from the previous step.
-          # Ensure your preset in export_presets.cfg is named exactly "Windows Desktop"
-          PACKAGE: ${{ steps.export.outputs.archive_directory }}/Windows Desktop.zip
+          ITCH_USER: llnuggetsll
+          ITCH_GAME: test-game
+          PACKAGE: Windows Desktop.zip
