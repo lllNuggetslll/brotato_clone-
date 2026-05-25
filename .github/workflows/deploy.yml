@@ -23,8 +23,10 @@ jobs:
           relative_project_path: ./
           archive_output: true
 
-      - name: Copy archive to workspace
-        run: cp "${{ steps.export.outputs.archive_directory }}/Windows Desktop.zip" "${{ github.workspace }}/Windows Desktop.zip"
+      - name: Copy archives to workspace
+        run: |
+          cp "${{ steps.export.outputs.archive_directory }}/Windows Desktop.zip" "${{ github.workspace }}/Windows Desktop.zip"
+          cp "${{ steps.export.outputs.archive_directory }}/Web.zip" "${{ github.workspace }}/Web.zip"
 
       # 2. This step takes the built game and pushes it to Itch.io
       - name: Publish Windows Build to Itch.io
@@ -35,3 +37,12 @@ jobs:
           ITCH_USER: llnuggetsll
           ITCH_GAME: test-game
           PACKAGE: Windows Desktop.zip
+
+      - name: Publish Web Build to Itch.io
+        uses: manleydev/butler-publish-itchio-action@v1.2.0
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
+          CHANNEL: html
+          ITCH_USER: llnuggetsll
+          ITCH_GAME: test-game
+          PACKAGE: Web.zip
