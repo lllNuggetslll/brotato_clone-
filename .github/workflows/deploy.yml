@@ -25,7 +25,7 @@ jobs:
 
       # 2. This step takes the built game and pushes it to Itch.io
       - name: Publish Windows Build to Itch.io
-        uses: manleydev/butler-publish-itchio-action@v1.0.3
+        uses: manleydev/butler-publish-itchio-action@v1.2.0
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
           CHANNEL: windows
